@@ -4,14 +4,16 @@ using ConsoleApp12;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ConsoleApp12.Migrations
 {
     [DbContext(typeof(OkulDbContext))]
-    partial class OkulDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220220064630_OgrenciAlter")]
+    partial class OgrenciAlter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,15 +89,10 @@ namespace ConsoleApp12.Migrations
                     b.Property<string>("Adi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
                     b.Property<string>("FullAd")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("nvarchar(max)")
-                        .HasComputedColumnSql("(Concat(Adi,' ',SoyAdi))");
+                        .HasComputedColumnSql("(Adi + SoyAdi)");
 
                     b.Property<string>("SoyAdi")
                         .HasColumnType("nvarchar(max)");

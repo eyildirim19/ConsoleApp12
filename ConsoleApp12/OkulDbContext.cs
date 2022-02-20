@@ -23,6 +23,8 @@ namespace ConsoleApp12
             modelBuilder.Entity<Donem>().HasKey(c => c.DonemID);
             modelBuilder.Entity<Donem>().Property(c => c.DonemID).ValueGeneratedNever(); // identity olmasın....
             modelBuilder.Entity<Not>().Property(c => c.Ortalama).HasComputedColumnSql("((Vize + Final) / 2)");
+            modelBuilder.Entity<Ogrenci>().Property(c => c.FullAd).HasComputedColumnSql("(Concat(Adi,' ',SoyAdi))");
+            modelBuilder.Entity<Ogrenci>().Property(c => c.CreDate).HasDefaultValueSql("getdate()");
         }
 
         public DbSet<Ogrenci> Ogrencis { get; set; }
@@ -63,7 +65,13 @@ namespace ConsoleApp12
         //  [Key]
         // [DatabaseGenerated(DatabaseGeneratedOption.None)] // Identity Değil..
         public int No { get; set; }
-        public string AdiSoyAdi { get; set; }
+
+        [Column(Order = 2)]
+        public string Adi { get; set; }
+        [Column(Order = 3)]
+        public string SoyAdi { get; set; }
+        public string FullAd { get; set; }
+        public DateTime CreDate { get; set; }
     }
 
     public class YariYil

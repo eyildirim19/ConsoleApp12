@@ -4,14 +4,16 @@ using ConsoleApp12;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ConsoleApp12.Migrations
 {
     [DbContext(typeof(OkulDbContext))]
-    partial class OkulDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220220070707_OgrenciAlter2")]
+    partial class OgrenciAlter2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,7 +92,7 @@ namespace ConsoleApp12.Migrations
                     b.Property<DateTime>("CreDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValue(new DateTime(2022, 2, 20, 10, 7, 6, 399, DateTimeKind.Local).AddTicks(9942));
 
                     b.Property<string>("FullAd")
                         .ValueGeneratedOnAddOrUpdate()
